@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hostel Complaint System</title>
+</head>
+<body>
+  <h2>Submit Complaint</h2>
+
+  <input id="roll" placeholder="Roll Number"><br><br>
+  <input id="title" placeholder="Title"><br><br>
+  <textarea id="desc" placeholder="Description"></textarea><br><br>
+  <input id="room" placeholder="Room No"><br><br>
+  <button onclick="submitComplaint()">Submit</button>
+
+  <hr>
+
+  <h2>All Complaints</h2>
+  <div id="list"></div>
+
+<script>
+async function submitComplaint() {
+  const data = {
+    student_roll: document.getElementById("roll").value,
+    title: document.getElementById("title").value,
+    description: document.getElementById("desc").value,
+    room: document.getElementById("room").value,
+    status: "Pending",
+    date: new Date().toISOString().slice(0,10)
+  };
+
+  await fetch("http://localhost:5000/complaints", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  alert("Complaint Submitted!");
+  loadComplaints();
+}
+
+async function loadComplaints() {
+  const res = await fetch("http://localhost:5000/complaints");
+  const data = await res.json();
+
+  let html = "";
+  data.forEach(c => {
+    html += `<p><b>${c.title}</b> (${c.room}) - ${c.status}</p>`;
+  });
+
+  document.getElementById("list").innerHTML = html;
+}
+
+loadComplaints();
+</script>
+
+</body>
+</html>
