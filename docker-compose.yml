@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   mongo:
     image: mongo
@@ -9,6 +7,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      - mongo-data:/data/db     # <-- THIS FIXES DATABASE DELETE ISSUE
     networks:
       - hostel-network
 
@@ -23,6 +23,8 @@ services:
       ME_CONFIG_MONGODB_URL: "mongodb://root:root@mongo:27017/"
     networks:
       - hostel-network
+    depends_on:
+      - mongo
 
   backend:
     image: node:18
@@ -51,3 +53,6 @@ services:
 networks:
   hostel-network:
     driver: bridge
+
+volumes:
+  mongo-data:     # <-- PERSISTENT DB VOLUME CREATED HERE

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">🏠 Hostel Portal</a>
+      <div class="d-flex">
+        <span class="navbar-text me-3" id="studentInfo"></span>
+        <button class="btn btn-outline-light btn-sm" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Welcome, <span id="studentName"></span>!</h2>
+        <p class="text-muted">Roll: <span id="studentRoll"></span> | Room: <span id="studentRoom"></span></p>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5 class="card-title">📝 Submit New Complaint</h5>
+            <p class="card-text">Report any hostel-related issues</p>
+            <a href="submit_complaint.html" class="btn btn-primary">Submit Complaint</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5 class="card-title">📋 My Complaints</h5>
+            <p class="card-text">View your complaint history</p>
+            <a href="complaint_history.html" class="btn btn-info">View History</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <h4>Recent Complaints</h4>
+        <div id="recentComplaints"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/student_dashboard.js"></script>
+</body>
+</html>
